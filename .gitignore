@@ -1,0 +1,15 @@
+### Cypress Custom .gitignore ###
+*.log.*
+dist-*
+build
+.history
+.publish
+_test-output
+cypress.zip
+.babel-cache
+
+# Optional npm cache directory
+.npm
+
+# cypress env json
+cypress.env.json

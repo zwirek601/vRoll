@@ -1,0 +1,43 @@
+stages:
+  - smoke-test
+  - regression-test
+
+default:
+  tags:
+    - long-running
+
+smoke-tests:
+  extends: .test
+  stage: smoke-test
+  script:
+    # install dependencies
+    - npm ci
+    # run Cypress tests
+    - npm run cy:smoke
+  allow_failure: true
+
+regression-tests:
+  extends: .test
+  stage: regression-test
+  script:
+    # install dependencies
+    - npm ci
+    # run Cypress tests
+    - npm run cy
+  allow_failure: true
+
+.test
+  image: node:latest //docker image
+  cache: 
+    key:
+    paths:
+      - node_modules
+      - /root/.cache/Cypress/
+  artifacts:
+    paths:
+      - cypress/videos/**/*.mp4
+      - cypress/screenshots/**/*.png
+    expire_in: 3 hours
+    when: always
+  after_script:
+    - npm run posttest
