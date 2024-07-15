@@ -13,3 +13,9 @@ cypress.zip
 
 # cypress env json
 cypress.env.json
+
+# packages
+node_modules
+
+# IDE
+.idea
